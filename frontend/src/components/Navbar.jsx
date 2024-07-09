@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export function NavComponent() {
   return (
-    <div className="max-w-6xl mx-auto py-2">
+    <div className="py-4">
       <Navbar fluid rounded>
         <Navbar.Brand>
           <img src={assets.logo} className="mr-3 h-6" alt="Tomato Logo" />

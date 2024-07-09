@@ -6,7 +6,7 @@ import PlaceOrder from "./pages/PlaceOrder";
 
 function App() {
   return (
-    <div>
+    <div className="max-w-6xl px-4 mx-auto overflow-hidden">
       <BrowserRouter>
         <NavComponent />
         <Routes>
