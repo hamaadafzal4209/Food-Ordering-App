@@ -3,10 +3,11 @@ import { NavComponent } from "./components/Navbar";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import PlaceOrder from "./pages/PlaceOrder";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="max-w-6xl px-4 mx-auto overflow-hidden">
+    <div>
       <BrowserRouter>
         <NavComponent />
         <Routes>
@@ -14,6 +15,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </div>
   );

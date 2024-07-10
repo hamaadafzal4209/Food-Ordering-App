@@ -7,7 +7,7 @@ function Home() {
   const [category, setCategory] = useState("All");
 
   return (
-    <div>
+    <div className="max-w-6xl px-4 mx-auto overflow-hidden">
       <Header />
       <ExploreMenu category={category} setCategory={setCategory} />
       <FoodDisplay category={category} />

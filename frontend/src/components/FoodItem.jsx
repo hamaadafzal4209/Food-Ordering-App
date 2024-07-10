@@ -8,7 +8,7 @@ function FoodItem({ id, name, price, image, description }) {
 
   return (
     <div
-      className="food-item w-full m-auto rounded-[15px]"
+      className="animate-fadeIn w-full m-auto rounded-[15px]"
       style={{ boxShadow: "0px 0px 10px #0000001f" }}
     >
       <div className="relative">
