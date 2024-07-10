@@ -9,7 +9,7 @@ function ExploreMenu({ category, setCategory }) {
         aliquid molestias unde commodi consequuntur deleniti quasi, fugiat
         inventore reiciendis!
       </p>
-      <div className="flex items-center gap-8 overflow-x-scroll hideScrollBar my-8 sm:my-12">
+      <div className="flex items-center gap-8 overflow-x-scroll hideScrollBar my-6 sm:my-8">
         {menu_list.map((item, index) => (
           <div
             key={index}

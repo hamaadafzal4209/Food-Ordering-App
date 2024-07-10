@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { assets } from "../assets/assets";
+import { StoreContext } from "../context/StoreContext";
 
 function FoodItem({ id, name, price, image, description }) {
-  const [itemCount, setItemCount] = useState(0);
+  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+  const itemCount = cartItems[id] || 0;
 
   return (
     <div
@@ -15,9 +17,9 @@ function FoodItem({ id, name, price, image, description }) {
           alt={name}
           className="w-full rounded-tr-[15px] rounded-tl-[15px]"
         />
-        {!itemCount ? (
+        {itemCount === 0 ? (
           <img
-            onClick={() => setItemCount((prev) => prev + 1)}
+            onClick={() => addToCart(id)}
             src={assets.add_icon_white}
             alt=""
             className="cursor-pointer absolute w-[35px] bottom-[15px] right-[15px] rounded-full"
@@ -25,14 +27,14 @@ function FoodItem({ id, name, price, image, description }) {
         ) : (
           <div className="absolute bottom-[15px] right-[15px] flex items-center gap-[10px] p-[6px] rounded-full bg-white">
             <img
-              onClick={() => setItemCount((prev) => prev - 1)}
+              onClick={() => removeFromCart(id)}
               src={assets.remove_icon_red}
               alt=""
               className="w-[30px] cursor-pointer"
             />
             <p>{itemCount}</p>
             <img
-              onClick={() => setItemCount((prev) => prev + 1)}
+              onClick={() => addToCart(id)}
               src={assets.add_icon_green}
               alt=""
               className="w-[30px] cursor-pointer"
