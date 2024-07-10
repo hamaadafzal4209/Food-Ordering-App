@@ -6,7 +6,7 @@ function FoodDisplay({ category }) {
   const { food_list } = useContext(StoreContext);
 
   return (
-    <div className="mb-10">
+    <div className="mb-12">
       <h2 className="text-2xl font-semibold">Top dishes near you</h2>
       <div className="food-display-list">
         {food_list.map((item, index) => {

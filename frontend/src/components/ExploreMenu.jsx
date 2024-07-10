@@ -2,7 +2,7 @@ import { menu_list } from "../assets/assets";
 
 function ExploreMenu({ category, setCategory }) {
   return (
-    <div className="py-10">
+    <div className="py-10" id="explore-menu">
       <h1 className="text-3xl font-semibold pb-4">Explore our menu</h1>
       <p className="text-balance">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus iusto

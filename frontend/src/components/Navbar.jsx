@@ -1,8 +1,16 @@
+import { useState } from "react";
 import { Button, Navbar } from "flowbite-react";
 import { assets } from "../assets/assets";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export function NavComponent() {
+  const location = useLocation();
+  const [activeLink, setActiveLink] = useState(location.pathname);
+
+  const handleSetActiveLink = (path) => {
+    setActiveLink(path);
+  };
+
   return (
     <div className="py-4 max-w-6xl px-4 mx-auto overflow-hidden">
       <Navbar fluid rounded>
@@ -27,18 +35,56 @@ export function NavComponent() {
           </Button>
           <Navbar.Toggle />
         </div>
-        <Navbar.Collapse>
+        <Navbar.Collapse className="lowercase">
           <Navbar.Link>
-            <Link to="/" className="cursor-pointer" active="true">Home</Link>
+            <Link
+              to="/"
+              className={`cursor-pointer ${
+                activeLink === "/" ? 'border-b-[2px]  border-orange-500 pb-1' : ""
+              }`}
+              onClick={() => handleSetActiveLink("/")}
+            >
+              Home
+            </Link>
           </Navbar.Link>
           <Navbar.Link>
-            <Link to="/menu" className="cursor-pointer">Menu</Link>
+            <a
+              href="#explore-menu"
+              className={`cursor-pointer ${
+                activeLink === "/explore-menu"
+                  ? "border-b-[2px]  border-orange-500 pb-1"
+                  : ""
+              }`}
+              onClick={() => handleSetActiveLink("/explore-menu")}
+            >
+              Menu
+            </a>
           </Navbar.Link>
           <Navbar.Link>
-            <Link to="/mobile-app" className="cursor-pointer">Mobile-App</Link>
+            <a
+              href="#mobile-app"
+              className={`cursor-pointer ${
+                activeLink === "/mobile-app"
+                  ? "border-b-[2px]  border-orange-500 pb-1"
+                  : ""
+              }`}
+              onClick={() => handleSetActiveLink("/mobile-app")}
+            >
+              Mobile App
+            </a>
           </Navbar.Link>
           <Navbar.Link>
-            <Link to="/contact-us" className="cursor-pointer">Contact-Us</Link>
+            <a
+              href="#footer"
+              className={`cursor-pointer ${
+                activeLink === "/footer"
+                  ? "border-b-[2px]  border-orange-500 pb-1"
+                  : ""
+              }`}
+              onClick={() => handleSetActiveLink("/footer")}
+            >
+              Contact Us
+            </a>
           </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>

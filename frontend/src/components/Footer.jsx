@@ -2,7 +2,7 @@ import { assets } from "../assets/assets";
 
 function Footer() {
   return (
-    <footer className="bg-[#323232] text-[#d9d9d9] p-5 pt-10 flex flex-col items-center">
+    <footer id="footer" className="bg-[#323232] text-[#d9d9d9] mt-10 md:mt-20 p-5 pt-10 flex flex-col items-center">
       <div className="w-full max-w-6xl grid gap-10 md:gap-5 md:grid-cols-2fr-1fr-1fr">
         <div className="">
           <img src={assets.logo} alt="Logo" className="mb-5" />
