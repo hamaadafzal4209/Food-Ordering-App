@@ -2,7 +2,7 @@ import { assets } from "../assets/assets";
 
 function AppDownload() {
   return (
-    <div className="m-auto mt-10 pt-10 text-center" id="mobile-app">
+    <div className="m-auto mt-10 mb-10 md:mb-20 pt-10 text-center" id="mobile-app">
       <p
         style={{ fontSize: "max(3vw, 20px)" }}
         className="capitalize font-semibold"

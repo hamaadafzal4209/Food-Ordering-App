@@ -15,8 +15,8 @@ export function DashSidebar() {
   }, [location.search]);
 
   return (
-    <aside className="h-screen max-w-64 border-r border-black">
-      <div className="pt-16 flex flex-col gap-6">
+    <aside className="min-h-screen h-full max-w-64 border-r sticky top-0 border-black">
+      <div className="pt-12 flex flex-col gap-6">
         <Link to="/dashboard?tab=add">
           <div
             className={`border border-[#a9a9a9] border-r-0 rounded-tl-[4px] rounded-bl-[4px] p-3 flex items-center gap-4 ${
@@ -33,7 +33,7 @@ export function DashSidebar() {
               tab === "list" ? "bg-[#fff0ed] border-orange-500" : ""
             }`}
           >
-            <img className="w-6" src={admin_assets.order_icon} alt="" />
+            <img className="w-6" src={admin_assets.list_icon} alt="" />
             <p className="hidden md:block md:pr-20">List Items</p>
           </div>
         </Link>

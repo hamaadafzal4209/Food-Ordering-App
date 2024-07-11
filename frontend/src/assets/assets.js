@@ -4,6 +4,7 @@ import header_img from './header_img.png'
 import search_icon from './search_icon.png'
 import adminlogo from './admin-logo.png'
 import add_icon from './add_icon.png'
+import list_icon from './list_icon.png'
 import order_icon from './order_icon.png'
 import profile_image from './profile_image.png'
 import upload_area from './upload_area.png'
@@ -93,7 +94,8 @@ export const admin_assets = {
     order_icon,
     profile_image,
     upload_area,
-    parcel_icon
+    parcel_icon,
+    list_icon
 }
 
 export const menu_list = [
