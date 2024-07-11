@@ -2,6 +2,11 @@ import basket_icon from './basket_icon.png'
 import logo from './logo.png'
 import header_img from './header_img.png'
 import search_icon from './search_icon.png'
+import adminlogo from './admin-logo.png'
+import add_icon from './add_icon.png'
+import order_icon from './order_icon.png'
+import profile_image from './profile_image.png'
+import upload_area from './upload_area.png'
 import menu_1 from './menu_1.png'
 import menu_2 from './menu_2.png'
 import menu_3 from './menu_3.png'
@@ -79,6 +84,15 @@ export const assets = {
     profile_icon,
     logout_icon,
     bag_icon,
+    parcel_icon
+}
+
+export const admin_assets = {
+    adminlogo,
+    add_icon,
+    order_icon,
+    profile_image,
+    upload_area,
     parcel_icon
 }
 

@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import PlaceOrder from "./pages/PlaceOrder";
 import Footer from "./components/Footer";
+import DashBoard from "./pages/DashBoard";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
+          <Route path="/dashboard" element={<DashBoard />} />
         </Routes>
         <Footer/>
       </BrowserRouter>
