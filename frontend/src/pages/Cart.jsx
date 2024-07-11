@@ -1,10 +1,13 @@
 import { Table } from "flowbite-react";
 import { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const { food_list, cartItems, removeFromCart, getTotalCartAmount } =
     useContext(StoreContext);
+
+  const navigate = useNavigate();
 
   return (
     <div className="max-w-6xl px-4 mx-auto">
@@ -56,6 +59,7 @@ function Cart() {
         className="mt-20 flex justify-between flex-col md:flex-row"
         style={{ gap: "max(6vw,20px)" }}
       >
+        {/* cart total */}
         <div className="flex-1 border p-6">
           <h1 className="text-xl font-semibold">Card Totals</h1>
           <div className="my-4">
@@ -66,17 +70,19 @@ function Cart() {
             <hr className="my-[10px]" />
             <div className="flex justify-between gap-5 text-[#555]">
               <p>Delivery Fee</p>
-              <p>${2}</p>
+              <p>${getTotalCartAmount() === 0 ? 0 : 2}</p>
             </div>
             <hr className="my-[10px]" />
             <div className="flex justify-between gap-5 text-[#555]">
               <b>Total</b>
-              <b>${getTotalCartAmount() + 2}</b>
+              <b>
+                ${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}
+              </b>
             </div>
           </div>
           <button
-            className="uppercase text-white bg-orange-500 py-3 rounded-[4px] cursor-pointer"
-            style={{ width: "max(20vw,200px)" }}
+            onClick={() => navigate("/order")}
+            className="uuppercase text-white bg-orange-500 py-3 rounded-md max-w-60 w-full font-semibold"
           >
             Proceed To Checkout
           </button>
