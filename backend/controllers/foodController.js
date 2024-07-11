@@ -22,3 +22,13 @@ export const addFood = async (req, res, next) => {
     res.json({ success: false, message: "An Error Occured" });
   }
 };
+
+export const listFood = async (req, res) => {
+  try {
+    const allFoods = await foodModel.find();
+    res.json({ success: true, data: allFoods });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "An Error Occured" });
+  }
+};
