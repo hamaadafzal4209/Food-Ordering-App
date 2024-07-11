@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Navbar } from "flowbite-react";
 import { assets } from "../assets/assets";
 import { Link, useLocation } from "react-router-dom";
 import LoginPopup from "./LoginPopup";
+import { StoreContext } from "../context/StoreContext";
 
 export function NavComponent() {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
   const [showModal, setShowModal] = useState(false);
+
+  const { getTotalCartAmount } = useContext(StoreContext);
 
   const handleSetActiveLink = (path) => {
     setActiveLink(path);
@@ -37,13 +40,20 @@ export function NavComponent() {
               className="w-5 sm:w-6 flex-shrink-0 cursor-pointer"
               alt="Search Icon"
             />
-            <Link to="/cart">
-              <img
-                src={assets.basket_icon}
-                className="w-5 sm:w-6 flex-shrink-0 cursor-pointer"
-                alt="Basket Icon"
-              />
-            </Link>
+            <div className="relative">
+              {getTotalCartAmount() === 0 ? (
+                ""
+              ) : (
+                <div className="w-2 h-2 bg-orange-500 absolute -right-1 -top-2 rounded-full"></div>
+              )}
+              <Link to="/cart">
+                <img
+                  src={assets.basket_icon}
+                  className="w-5 sm:w-6 flex-shrink-0 cursor-pointer"
+                  alt="Basket Icon"
+                />
+              </Link>
+            </div>
             <Button
               onClick={() => setShowModal(true)}
               className="sm:px-3"

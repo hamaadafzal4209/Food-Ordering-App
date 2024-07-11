@@ -1,34 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Outfit", sans-serif;
-    scroll-behavior: smooth;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 50%;
+}
+
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: tomato;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: rgb(249, 47, 11);
+  cursor: pointer;
 }
 
 .header {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0)), url('./assets/header_img.png');
-    min-height: 500px;
-    width: 100%;
-    background-size: cover;
-    background-position: center center;
-    border-radius: 20px;
+  background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.6),
+      rgba(255, 255, 255, 0)
+    ),
+    url("./assets/header_img.png");
+  min-height: 500px;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 20px;
 }
 
 .hideScrollBar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
-.food-display-list{
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
-    margin-top: 30px;
-    gap: 30px;
-    row-gap: 50px;
+.food-display-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  margin-top: 30px;
+  gap: 30px;
+  row-gap: 50px;
 }

@@ -3,13 +3,14 @@ import { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
 
 function Cart() {
-  const { food_list, cartItems, removeFromCart } = useContext(StoreContext);
+  const { food_list, cartItems, removeFromCart, getTotalCartAmount } =
+    useContext(StoreContext);
 
   return (
     <div className="max-w-6xl px-4 mx-auto">
       <div className="overflow-x-auto hideScrollBar">
         <Table className="text-center whitespace-nowrap">
-          <Table.Head className="border-b-[2px] border-gray-300 ">
+          <Table.Head>
             <Table.HeadCell>Items</Table.HeadCell>
             <Table.HeadCell>Title</Table.HeadCell>
             <Table.HeadCell>Price</Table.HeadCell>
@@ -53,24 +54,24 @@ function Cart() {
       {/* cart bottom */}
       <div
         className="mt-20 flex justify-between flex-col md:flex-row"
-        style={{ gap: "max(12vw,20px)" }}
+        style={{ gap: "max(6vw,20px)" }}
       >
-        <div className="flex-1">
+        <div className="flex-1 border p-6">
           <h1 className="text-xl font-semibold">Card Totals</h1>
           <div className="my-4">
             <div className="flex justify-between gap-5 text-[#555]">
               <p>Subtotal</p>
-              <p>{0}</p>
+              <p>${getTotalCartAmount()}</p>
             </div>
             <hr className="my-[10px]" />
             <div className="flex justify-between gap-5 text-[#555]">
               <p>Delivery Fee</p>
-              <p>{2}</p>
+              <p>${2}</p>
             </div>
             <hr className="my-[10px]" />
             <div className="flex justify-between gap-5 text-[#555]">
               <b>Total</b>
-              <b>{0}</b>
+              <b>${getTotalCartAmount() + 2}</b>
             </div>
           </div>
           <button
@@ -80,27 +81,21 @@ function Cart() {
             Proceed To Checkout
           </button>
         </div>
-        {/* cart promo code */}
-        <div className="flex-1">
-          <div className="">
-            <p className="text-[#555]">
-              If you have a promo code, Enter it here
-            </p>
-            <div className="mt-[10px] flex justify-between items-center bg-[#eaeaea] rounded-[4px] ">
-              <input
-                type="text"
-                name=""
-                className="bg-transparent border-none outline-none pl-[10px] focus:border-none focus:outline-none"
-                placeholder="Promo Code"
-                id=""
-              />
-              <button
-                style={{ widows: "max(10vw, 150px)" }}
-                className="px-[12px] py-[5px] bg-black text-white rounded-[4px]"
-              >
-                Submit
-              </button>
-            </div>
+        {/* Promo Code */}
+        <div className="w-full md:max-w-sm p-6 border border-gray-200 rounded bg-white">
+          <h2 className="text-xl font-semibold mb-6">Promo Code</h2>
+          <p className="text-gray-700 mb-4">
+            If you have a promo code, enter it here:
+          </p>
+          <div className="flex gap-4">
+            <input
+              type="text"
+              placeholder="Promo Code"
+              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-orange-500 transition duration-300"
+            />
+            <button className="py-3 px-6 bg-black text-white rounded hover:bg-gray-800 transition duration-300">
+              Submit
+            </button>
           </div>
         </div>
       </div>
