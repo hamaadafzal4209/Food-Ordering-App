@@ -1,14 +1,22 @@
 import { useContext, useState } from "react";
-import { Button, Navbar } from "flowbite-react";
+import { Button, Dropdown, Navbar } from "flowbite-react";
 import { assets } from "../assets/assets";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
 
 export function NavComponent() {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
 
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const navigate = useNavigate();
+
+  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    setToken("");
+    navigate('/');
+  }
 
   const handleSetActiveLink = (path) => {
     setActiveLink(path);
@@ -47,15 +55,37 @@ export function NavComponent() {
                 />
               </Link>
             </div>
-            <Button
-              className="sm:px-3"
-              color="light"
-              pill
-            >
-              <Link to='/login'>
-              Sign In
-              </Link>
-            </Button>
+            {!token ? (
+              <Button className="sm:px-3" color="light" pill>
+                <Link to="/login">Sign In</Link>
+              </Button>
+            ) : (
+              <div className="flex">
+                <Dropdown
+                  arrowIcon={false}
+                  inline
+                  label={
+                    <div>
+                      <img
+                        className="w-6 h-6"
+                        src={assets.profile_icon}
+                        alt=""
+                      />
+                    </div>
+                  }
+                >
+                  <Dropdown.Item>
+                    <img src={assets.bag_icon} className="w-5 mr-2" alt="" />
+                    <p>Orders</p>
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={logout}>
+                    <img src={assets.logout_icon} className="w-5 mr-2" alt="" />
+                    <p className="">Logout</p>
+                  </Dropdown.Item>
+                </Dropdown>
+              </div>
+            )}
             <Navbar.Toggle />
           </div>
           <Navbar.Collapse className="lowercase">
