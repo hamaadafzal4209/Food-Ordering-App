@@ -48,7 +48,7 @@ function FoodItem({ id, name, price, image, description }) {
           <img className="w-[70px]" src={assets.rating_starts} alt="Rating" />
         </div>
         <p className="text-[#676767] text-xs">{description}</p>
-        <p className="text-orange-500 font-medium text-xl my-[10px]">
+        <p className="text-[#FF6347] font-medium text-xl my-[10px]">
           ${price}
         </p>
       </div>

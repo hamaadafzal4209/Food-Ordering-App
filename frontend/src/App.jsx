@@ -8,6 +8,8 @@ import DashBoard from "./pages/DashBoard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "react-scroll-to-top";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <NavComponent />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/dashboard" element={<DashBoard />} />

@@ -44,6 +44,7 @@ export const registerUser = async (req, res) => {
 
     res.status(201).json({
       success: true,
+      message: "User registered successfully",
       token,
       user: { id: user._id, name: user.name, email: user.email },
     });
@@ -74,7 +75,11 @@ export const loginUser = async (req, res) => {
     }
 
     const token = createToken(user._id);
-    res.json({ success: true, token, message: "Login successful" });
+    res.json({
+      success: true,
+      message: "Login successful",
+      token,
+    });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: "An error occurred" });
