@@ -5,7 +5,7 @@ function PlaceOrder() {
   const { getTotalCartAmount } = useContext(StoreContext);
 
   return (
-    <div className="max-w-6xl px-4 mx-auto">
+    <div className="w-full md:w-[90%] px-4 mx-auto">
       <form className="flex flex-col md:flex-row gap-12 lg:gap-32 mt-4 mb-20">
         {/* left */}
         <div className="flex-1">

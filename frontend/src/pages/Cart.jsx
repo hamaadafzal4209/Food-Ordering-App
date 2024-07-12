@@ -10,7 +10,7 @@ function Cart() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full md:w-[95%] px-4 mx-auto">
+    <div className="w-full md:w-[90%] px-4 mx-auto">
       <div className="overflow-x-auto hideScrollBar">
         <Table className="text-center whitespace-nowrap">
           <Table.Head>
