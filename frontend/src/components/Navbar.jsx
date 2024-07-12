@@ -13,10 +13,10 @@ export function NavComponent() {
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setToken("");
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   const handleSetActiveLink = (path) => {
     setActiveLink(path);

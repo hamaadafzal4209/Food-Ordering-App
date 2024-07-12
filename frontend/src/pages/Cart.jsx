@@ -31,7 +31,7 @@ function Cart() {
                   >
                     <Table.Cell>
                       <img
-                        src={item.image}
+                        src={"http://localhost:8000"+"/images/"+item.image}
                         className="w-24 h-14 mx-auto object-cover"
                         alt=""
                       />
