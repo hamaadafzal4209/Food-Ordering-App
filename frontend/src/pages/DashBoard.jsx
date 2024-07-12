@@ -19,8 +19,8 @@ function DashBoard() {
 
   return (
     <div className="border-t border-black">
-      <div className="px-4 max-w-6xl mx-auto">
-        <div className="flex items-start">
+      <div className="px-4 w-full md:w-[95%] mx-auto">
+        <div className="flex items-start overflow-hidden">
           <DashSidebar />
           {tab === "add" && <DashAddItem />}
           {tab === "list" && <DashLists />}

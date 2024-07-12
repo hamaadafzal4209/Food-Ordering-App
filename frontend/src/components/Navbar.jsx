@@ -23,7 +23,7 @@ export function NavComponent() {
   return (
     <>
       {showModal && <LoginPopup onClose={handleCloseModal} />}
-      <div className="py-4 max-w-6xl px-4 mx-auto overflow-hidden">
+      <div className="py-4 w-full md:w-[95%] px-4 mx-auto overflow-hidden">
         <Navbar fluid rounded>
           <Navbar.Brand>
             <Link to="/">

@@ -5,11 +5,15 @@ import Cart from "./pages/Cart";
 import PlaceOrder from "./pages/PlaceOrder";
 import Footer from "./components/Footer";
 import DashBoard from "./pages/DashBoard";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ScrollToTop from "react-scroll-to-top";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <ToastContainer />
         <NavComponent />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -17,7 +21,8 @@ function App() {
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/dashboard" element={<DashBoard />} />
         </Routes>
-        <Footer/>
+        <Footer />
+        <ScrollToTop smooth className="flex items-center justify-center p-3" />
       </BrowserRouter>
     </div>
   );

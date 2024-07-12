@@ -1,7 +1,7 @@
 
 function DashOrders() {
   return (
-    <div>
+    <div className="border-l border-black min-h-screen h-full">
       oredrs
     </div>
   )

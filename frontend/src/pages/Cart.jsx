@@ -10,7 +10,7 @@ function Cart() {
   const navigate = useNavigate();
 
   return (
-    <div className="max-w-6xl px-4 mx-auto">
+    <div className="w-full md:w-[95%] px-4 mx-auto">
       <div className="overflow-x-auto hideScrollBar">
         <Table className="text-center whitespace-nowrap">
           <Table.Head>
@@ -56,7 +56,7 @@ function Cart() {
       </div>
       {/* cart bottom */}
       <div
-        className="mt-20 flex justify-between flex-col md:flex-row"
+        className="my-20 flex justify-between flex-col md:flex-row"
         style={{ gap: "max(6vw,20px)" }}
       >
         {/* cart total */}

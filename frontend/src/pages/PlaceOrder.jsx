@@ -6,7 +6,7 @@ function PlaceOrder() {
 
   return (
     <div className="max-w-6xl px-4 mx-auto">
-      <form className="flex flex-col md:flex-row gap-12 lg:gap-32 mt-4">
+      <form className="flex flex-col md:flex-row gap-12 lg:gap-32 mt-4 mb-20">
         {/* left */}
         <div className="flex-1">
           <p className="text-xl sm:text-3xl font-semibold mb-8">
