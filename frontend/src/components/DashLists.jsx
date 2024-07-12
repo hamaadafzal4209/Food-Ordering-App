@@ -36,11 +36,11 @@ function DashLists() {
   };
 
   return (
-    <div className="w-full p-5 border-l border-black min-h-screen h-full">
+    <div className="w-full p-5 px-5 sm:px-10 border-l border-black min-h-screen h-full">
       <h2 className="text-lg font-semibold pb-4">All Foods List</h2>
       <div className="overflow-x-auto hideScrollBar">
         <Table className="text-center whitespace-nowrap">
-          <Table.Head>
+          <Table.Head className="bg-[#f9f9f9]">
             <Table.HeadCell>Image</Table.HeadCell>
             <Table.HeadCell>Name</Table.HeadCell>
             <Table.HeadCell>Category</Table.HeadCell>
