@@ -34,14 +34,10 @@ export const registerUser = async (req, res) => {
     }
 
     // Hash password
-    const hashPassword = bcrypt.hashSync(password, 10);
+    const hashPassword = await bcrypt.hash(password, 10);
 
     // Create a new user
-    const newUser = new userModel({
-      name,
-      email,
-      password: hashPassword,
-    });
+    const newUser = new userModel({ name, email, password: hashPassword });
 
     const user = await newUser.save();
     const token = createToken(user._id);
@@ -52,7 +48,7 @@ export const registerUser = async (req, res) => {
       user: { id: user._id, name: user.name, email: user.email },
     });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(500).json({ success: false, message: "An error occurred" });
   }
 };
@@ -64,19 +60,23 @@ export const loginUser = async (req, res) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      return res.json({ success: false, message: "User not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
     }
 
     const matchPassword = await bcrypt.compare(password, user.password);
 
     if (!matchPassword) {
-      return res.json({ success: false, message: "Wrong Cradientials" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
     const token = createToken(user._id);
     res.json({ success: true, token, message: "Login successful" });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "An Error Occurred" });
+    console.error(error.message);
+    res.status(500).json({ success: false, message: "An error occurred" });
   }
 };
