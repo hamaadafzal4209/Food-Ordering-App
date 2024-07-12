@@ -21,7 +21,9 @@ export const registerUser = async (req, res) => {
 
     // Validate email
     if (!validator.isEmail(email)) {
-      return res.status(400).json({ success: false, message: "Please enter a valid email" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Please enter a valid email" });
     }
 
     // Validate password
@@ -44,13 +46,11 @@ export const registerUser = async (req, res) => {
     const user = await newUser.save();
     const token = createToken(user._id);
 
-    res
-      .status(201)
-      .json({
-        success: true,
-        token,
-        user: { id: user._id, name: user.name, email: user.email },
-      });
+    res.status(201).json({
+      success: true,
+      token,
+      user: { id: user._id, name: user.name, email: user.email },
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "An error occurred" });
@@ -58,5 +58,25 @@ export const registerUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-  res.send("hello");
+  const { email, password } = req.body;
+
+  try {
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    const matchPassword = await bcrypt.compare(password, user.password);
+
+    if (!matchPassword) {
+      return res.json({ success: false, message: "Wrong Cradientials" });
+    }
+
+    const token = createToken(user._id);
+    res.json({ success: true, token, message: "Login successful" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "An Error Occurred" });
+  }
 };
