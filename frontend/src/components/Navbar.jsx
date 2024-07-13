@@ -75,6 +75,17 @@ export function NavComponent() {
                   }
                 >
                   <Dropdown.Item>
+                    <Link to="/dashboard?tab=list" className="flex">
+                      <img
+                        src={assets.dashboard_icon}
+                        className="w-5 mr-2"
+                        alt=""
+                      />
+                      <p>Dashboard</p>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item>
                     <img src={assets.bag_icon} className="w-5 mr-2" alt="" />
                     <p>Orders</p>
                   </Dropdown.Item>
