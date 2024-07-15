@@ -17,7 +17,7 @@ const StoreContextProvider = (props) => {
         { headers: { token } }
       );
     }
-  };
+  };  
 
   const removeFromCart = async (itemId) => {
     setCartItems((prev) => {
@@ -36,7 +36,7 @@ const StoreContextProvider = (props) => {
         { headers: { token } }
       );
     }
-  };
+  };  
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
@@ -60,7 +60,7 @@ const StoreContextProvider = (props) => {
       {},
       { headers: { token } }
     );
-    setCartItems(response.data.cartData);
+    setCartItems(response.data.cartData || {}); // Ensure cartData is an object
   };
 
   useEffect(() => {

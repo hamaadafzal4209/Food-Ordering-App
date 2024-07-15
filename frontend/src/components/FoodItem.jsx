@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { assets } from "../assets/assets";
 import { StoreContext } from "../context/StoreContext";
 
-function FoodItem({ id, name, price, image, description }) {
-  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+function FoodItem({ id, name = "Unknown", price = 0, image = "", description = "No description available" }) {
+  const { cartItems = {}, addToCart, removeFromCart } = useContext(StoreContext); // Provide a default empty object for cartItems
   const itemCount = cartItems[id] || 0;
 
   return (
@@ -13,7 +13,7 @@ function FoodItem({ id, name, price, image, description }) {
     >
       <div className="relative">
         <img
-          src={'http://localhost:8000' + '/images/' + image}
+          src={'http://localhost:8000/images/' + image}
           alt={name}
           className="w-full rounded-tr-[15px] rounded-tl-[15px]"
         />
