@@ -10,11 +10,29 @@ export const placeOrder = async (req, res) => {
   try {
     // Validate incoming request
     const { userId, items, amount, address } = req.body;
-    if (!userId || !items || !amount || !address) {
+    if (!userId) {
       return res
         .status(400)
-        .json({ success: false, message: "Missing required fields" });
+        .json({ success: false, message: "Missing required field: userId" });
     }
+    
+    if (!items) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing required field: items" });
+    }
+    
+    if (!amount) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing required field: amount" });
+    }
+    
+    if (!address) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing required field: address" });
+    }    
 
     // Create a new order
     const newOrder = new orderModel({
