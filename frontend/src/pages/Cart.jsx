@@ -4,10 +4,13 @@ import { StoreContext } from "../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 
 function Cart() {
-  const { food_list, cartItems, removeFromCart, getTotalCartAmount } =
-    useContext(StoreContext);
-
+  const { food_list, cartItems, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
   const navigate = useNavigate();
+
+  // Ensure that data is defined and has the expected structure
+  if (!food_list || !cartItems) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="w-full md:w-[90%] px-4 mx-auto">
@@ -31,9 +34,9 @@ function Cart() {
                   >
                     <Table.Cell>
                       <img
-                        src={"http://localhost:8000"+"/images/"+item.image}
+                        src={`http://localhost:8000/images/${item.image}`}
                         className="w-24 h-14 mx-auto object-cover"
-                        alt=""
+                        alt={item.name}
                       />
                     </Table.Cell>
                     <Table.Cell>{item.name}</Table.Cell>
@@ -61,7 +64,7 @@ function Cart() {
       >
         {/* cart total */}
         <div className="flex-1 border p-6">
-          <h1 className="text-xl font-semibold">Card Totals</h1>
+          <h1 className="text-xl font-semibold">Cart Totals</h1>
           <div className="my-4">
             <div className="flex justify-between gap-5 text-[#555]">
               <p>Subtotal</p>
@@ -82,7 +85,7 @@ function Cart() {
           </div>
           <button
             onClick={() => navigate("/order")}
-            className="uuppercase text-white bg-orange-500 py-3 rounded-md max-w-60 w-full font-semibold"
+            className="uppercase text-white bg-orange-500 py-3 rounded-md max-w-60 w-full font-semibold"
           >
             Proceed To Checkout
           </button>

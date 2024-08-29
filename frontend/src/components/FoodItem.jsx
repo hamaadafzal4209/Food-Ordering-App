@@ -5,8 +5,13 @@ import { assets } from "../assets/assets";
 import { StoreContext } from "../context/StoreContext";
 
 function FoodItem({ id, name, price, description, image }) {
-  const { cartItems, addToCart, removeFromCart, url } =
-    useContext(StoreContext);
+  const {
+    cartItems = {},
+    addToCart,
+    removeFromCart,
+  } = useContext(StoreContext);
+
+  const itemCount = cartItems[id] || 0;
 
   return (
     <div
@@ -19,7 +24,7 @@ function FoodItem({ id, name, price, description, image }) {
           alt={name}
           className="w-full rounded-tr-[15px] rounded-tl-[15px]"
         />
-        {!cartItems[id] ? (
+        {!itemCount ? (
           <img
             className="cursor-pointer absolute w-[35px] bottom-[15px] right-[15px] rounded-full"
             onClick={() => addToCart(id)}
@@ -34,7 +39,7 @@ function FoodItem({ id, name, price, description, image }) {
               alt=""
               className="w-[30px] cursor-pointer"
             />
-            <p className="cartitemsp">{cartItems[id]}</p>
+            <p className="cartitemsp">{itemCount}</p>
             <img
               onClick={() => addToCart(id)}
               src={assets.add_icon_green}
@@ -55,5 +60,4 @@ function FoodItem({ id, name, price, description, image }) {
     </div>
   );
 }
-
 export default FoodItem;
