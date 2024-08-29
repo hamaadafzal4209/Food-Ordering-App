@@ -1,20 +1,19 @@
 import jwt from 'jsonwebtoken';
 
 const authMiddleware = async (req, res, next) => {
-    const { token } = req.headers;
-    if (!token) {
-      return res.json({ success: false, message: "Unauthorized. Login again" });
-    }
-    try {
-      const token_decode = jwt.verify(token, process.env.JWT_SECRET);
-      console.log("Token decoded:", token_decode); // Add this line
-      req.body.userId = token_decode.id;
-      next();
-    } catch (error) {
-      console.log(error);
-      return res.json({ success: false, message: "Unauthorized. Login again" });
-    }
-  };
-  
+  const token = req.headers.token;
+  if (!token) {
+    return res.status(401).json({ success: false, message: "Unauthorized. Login again" });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    console.log('Decoded Token:', decoded);
+    next();
+  } catch (error) {
+    console.error('Token verification failed:', error);
+    return res.status(401).json({ success: false, message: "Unauthorized. Login again" });
+  }
+};
 
 export default authMiddleware;

@@ -12,7 +12,6 @@ const StoreContextProvider = (props) => {
 
   const addToCart = async (itemId) => {
     try {
-      // Update local cartItems state
       setCartItems((prev) => {
         const updated = { ...prev };
         if (!updated[itemId]) {
@@ -22,23 +21,21 @@ const StoreContextProvider = (props) => {
         }
         return updated;
       });
-      
-      // Update server cart
+
       if (token) {
         await axios.post(
-          url + "/api/cart/add",
+          `${url}/api/cart/add`,
           { itemId },
           { headers: { token } }
         );
       }
     } catch (error) {
-      console.error('Error adding item to cart:', error);
+      console.error("Error adding item to cart:", error);
     }
   };
 
   const removeFromCart = async (itemId) => {
     try {
-      // Update local cartItems state
       setCartItems((prev) => {
         const updated = { ...prev };
         if (updated[itemId] > 0) {
@@ -47,16 +44,15 @@ const StoreContextProvider = (props) => {
         return updated;
       });
 
-      // Update server cart
       if (token) {
         await axios.post(
-          url + "/api/cart/remove",
+          `${url}/api/cart/remove`,
           { itemId },
           { headers: { token } }
         );
       }
     } catch (error) {
-      console.error('Error removing item from cart:', error);
+      console.error("Error removing item from cart:", error);
     }
   };
 
@@ -77,22 +73,24 @@ const StoreContextProvider = (props) => {
 
   const fetchFoodList = async () => {
     try {
-      const response = await axios.get(url + "/api/food/list");
+      const response = await axios.get(`${url}/api/food/list`);
       setFoodList(response.data.data);
     } catch (error) {
-      console.error('Error fetching food list:', error);
+      console.error("Error fetching food list:", error);
     }
   };
 
   const loadCartData = async (token) => {
     try {
-      const response = await axios.get(
-        url + "/api/cart/get",
-        { headers: { token } }
-      );
-      setCartItems(response.data.cartData);
+      const response = await axios.get(`${url}/api/cart/get`, {
+        headers: { token },
+      });
+      setCartItems(response.data.cartData || {});
     } catch (error) {
-      console.error('Error loading cart data:', error);
+      console.error(
+        "Error loading cart data:",
+        error.response?.data?.message || error.message
+      );
     }
   };
 

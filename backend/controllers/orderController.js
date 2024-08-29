@@ -4,27 +4,38 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// creating user order from frontend
 export const placeOrder = async (req, res) => {
   const frontend_url = "http://localhost:5173";
 
   try {
+    // Validate incoming request
+    const { userId, items, amount, address } = req.body;
+    if (!userId || !items || !amount || !address) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing required fields" });
+    }
+
+    // Create a new order
     const newOrder = new orderModel({
-      userId: req.body.userId,
-      items: req.body.items,
-      amount: req.body.amount,
-      address: req.body.address,
+      userId,
+      items,
+      amount,
+      address,
     });
     await newOrder.save();
-    await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
 
-    const line_items = req.body.items.map((item) => ({
+    // Clear the user's cart
+    await userModel.findByIdAndUpdate(userId, { cartData: {} });
+
+    // Create a Stripe checkout session
+    const line_items = items.map((item) => ({
       price_data: {
         currency: "pkr",
         product_data: {
           name: item.name,
         },
-        unit_amount: item.price * 100 * 280,
+        unit_amount: item.price * 100 * 280, // Adjust multiplier as needed
       },
       quantity: item.quantity,
     }));
@@ -33,15 +44,15 @@ export const placeOrder = async (req, res) => {
       price_data: {
         currency: "pkr",
         product_data: {
-          name: "Delivery Name",
+          name: "Delivery Fee",
         },
-        unit_amount: 2 * 100 * 280,
+        unit_amount: 2 * 100 * 280, // Adjust the multiplier as needed
       },
       quantity: 1,
     });
 
     const session = await stripe.checkout.sessions.create({
-      line_items: line_items,
+      line_items,
       mode: "payment",
       success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
       cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`,
@@ -49,7 +60,7 @@ export const placeOrder = async (req, res) => {
 
     res.json({ success: true, session_url: session.url });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "Error" });
+    console.error("Error placing order:", error);
+    res.status(500).json({ success: false, message: "Error placing order" });
   }
 };

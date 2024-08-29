@@ -4,8 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function PlaceOrder() {
-  const { getTotalCartAmount, token, food_list, cartItems, url } =
-    useContext(StoreContext);
+  const { getTotalCartAmount, token, food_list, cartItems } = useContext(StoreContext);
 
   const [data, setData] = useState({
     firstName: "",
@@ -19,9 +18,8 @@ function PlaceOrder() {
     phone: "",
   });
 
-  const onChangeHandler = async (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
     setData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -30,31 +28,40 @@ function PlaceOrder() {
 
   const placeOrder = async (e) => {
     e.preventDefault();
-    let orderItems = [];
-    food_list.forEach((item) => {
-      if (cartItems[item._id] > 0) {
-        let itemInfo = { ...item, quantity: cartItems[item._id] };
-        orderItems.push(itemInfo);
-      }
-    });
-    console.log(orderItems);
 
-    let orderData = {
+    // Prepare order items
+    const orderItems = food_list
+      .filter((item) => cartItems[item._id] > 0)
+      .map((item) => ({
+        ...item,
+        quantity: cartItems[item._id],
+      }));
+
+    // Prepare order data
+    const orderData = {
       address: data,
       items: orderItems,
-      amount: getTotalCartAmount() + 2,
+      amount: getTotalCartAmount() + 2, // Adding delivery fee
     };
-    let response = await axios.post(
-      "http://localhost/api/order/place",
-      orderData,
-      { headers: { token } }
-    );
-    
-    if (response.data.success) {
-      const { session_url } = response.data;
-      window.location.replace(session_url);
-    } else {
-      toast.error("An error occured");
+
+    try {
+      // Send order data to backend
+      const response = await axios.post(
+        "http://localhost:8000/api/order/place",
+        orderData,
+        { headers: { token } }
+      );
+
+      if (response.data.success) {
+        // Redirect to Stripe checkout
+        const { session_url } = response.data;
+        window.location.replace(session_url);
+      } else {
+        toast.error("An error occurred while placing the order");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      toast.error("An error occurred while placing the order");
     }
   };
 
@@ -64,11 +71,9 @@ function PlaceOrder() {
         onSubmit={placeOrder}
         className="flex flex-col md:flex-row gap-12 lg:gap-32 mt-4 mb-20"
       >
-        {/* left */}
+        {/* Left */}
         <div className="flex-1">
-          <p className="text-xl sm:text-3xl font-semibold mb-8">
-            Delivery Information
-          </p>
+          <p className="text-xl sm:text-3xl font-semibold mb-8">Delivery Information</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
               required
@@ -157,11 +162,9 @@ function PlaceOrder() {
             className="p-3 border rounded-md w-full mt-4"
           />
         </div>
-        {/* right */}
+        {/* Right */}
         <div className="flex-1">
-          <h1 className="text-xl sm:text-3xl font-semibold mb-6">
-            Cart Totals
-          </h1>
+          <h1 className="text-xl sm:text-3xl font-semibold mb-6">Cart Totals</h1>
           <div className="my-4">
             <div className="flex justify-between gap-5 text-[#555]">
               <p>Subtotal</p>
@@ -175,16 +178,14 @@ function PlaceOrder() {
             <hr className="my-[10px]" />
             <div className="flex justify-between gap-5 text-[#555]">
               <b>Total</b>
-              <b>
-                ${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}
-              </b>
+              <b>${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}</b>
             </div>
           </div>
           <button
             type="submit"
             className="uppercase text-white bg-orange-500 py-3 mt-4 rounded-md max-w-60 w-full font-semibold"
           >
-            Proceed To payment
+            Proceed To Payment
           </button>
         </div>
       </form>
