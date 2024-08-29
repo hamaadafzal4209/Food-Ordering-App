@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useContext } from "react";
 import { assets } from "../assets/assets";
 import { StoreContext } from "../context/StoreContext";
 
-function FoodItem({ id, name = "Unknown", price = 0, image = "", description = "No description available" }) {
-  const { cartItems = {}, addToCart, removeFromCart } = useContext(StoreContext); // Provide a default empty object for cartItems
-  const itemCount = cartItems[id] || 0;
+function FoodItem({ id, name, price, description, image }) {
+  const { cartItems, addToCart, removeFromCart, url } =
+    useContext(StoreContext);
 
   return (
     <div
@@ -13,16 +15,16 @@ function FoodItem({ id, name = "Unknown", price = 0, image = "", description = "
     >
       <div className="relative">
         <img
-          src={'http://localhost:8000/images/' + image}
+          src={"http://localhost:8000/images/" + image}
           alt={name}
           className="w-full rounded-tr-[15px] rounded-tl-[15px]"
         />
-        {itemCount === 0 ? (
+        {!cartItems[id] ? (
           <img
+            className="cursor-pointer absolute w-[35px] bottom-[15px] right-[15px] rounded-full"
             onClick={() => addToCart(id)}
             src={assets.add_icon_white}
             alt=""
-            className="cursor-pointer absolute w-[35px] bottom-[15px] right-[15px] rounded-full"
           />
         ) : (
           <div className="absolute bottom-[15px] right-[15px] flex items-center gap-[10px] p-[6px] rounded-full bg-white">
@@ -32,7 +34,7 @@ function FoodItem({ id, name = "Unknown", price = 0, image = "", description = "
               alt=""
               className="w-[30px] cursor-pointer"
             />
-            <p>{itemCount}</p>
+            <p className="cartitemsp">{cartItems[id]}</p>
             <img
               onClick={() => addToCart(id)}
               src={assets.add_icon_green}
@@ -48,9 +50,7 @@ function FoodItem({ id, name = "Unknown", price = 0, image = "", description = "
           <img className="w-[70px]" src={assets.rating_starts} alt="Rating" />
         </div>
         <p className="text-[#676767] text-xs">{description}</p>
-        <p className="text-[#FF6347] font-medium text-xl my-[10px]">
-          ${price}
-        </p>
+        <p className="text-[#FF6347] font-medium text-xl my-[10px]">${price}</p>
       </div>
     </div>
   );
