@@ -2,7 +2,7 @@ import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe("sk_test_51Pc6H6JvBGOIHYX6E7TrQBZahracgr1gvrexjDJDJBqxy6pnqvI0W0szJIYgga0qCnbRuSDily0ZTtZeQ3XhT2nS00wThAKXSS");
 
 export const placeOrder = async (req, res) => {
   const frontend_url = "http://localhost:5173";

@@ -32,7 +32,6 @@ const StoreContextProvider = (props) => {
           { itemId },
           { headers: { token } }
         );
-        toast.success("Item added to cart");
       }
     } catch (error) {
       console.error("Error adding item to cart:", error);
@@ -56,7 +55,6 @@ const StoreContextProvider = (props) => {
           { itemId },
           { headers: { token } }
         );
-        toast.success("Item removed from cart");
       }
     } catch (error) {
       console.error("Error removing item from cart:", error);
