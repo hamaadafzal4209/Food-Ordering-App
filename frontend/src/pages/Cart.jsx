@@ -7,13 +7,8 @@ function Cart() {
   const { food_list, cartItems, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
   const navigate = useNavigate();
 
-  // Ensure that data is defined and has the expected structure
-  if (!food_list || !cartItems) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div className="w-full md:w-[90%] px-4 mx-auto">
+    <div className="w-full md:w-[90%] md:mt-14 px-4 mx-auto">
       <div className="overflow-x-auto hideScrollBar">
         <Table className="text-center whitespace-nowrap">
           <Table.Head>

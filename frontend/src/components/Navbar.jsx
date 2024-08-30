@@ -85,10 +85,12 @@ export function NavComponent() {
                     </Link>
                   </Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item>
-                    <img src={assets.bag_icon} className="w-5 mr-2" alt="" />
-                    <p>Orders</p>
-                  </Dropdown.Item>
+                  <Link to="myorders">
+                    <Dropdown.Item>
+                      <img src={assets.bag_icon} className="w-5 mr-2" alt="" />
+                      <p>Orders</p>
+                    </Dropdown.Item>
+                  </Link>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={logout}>
                     <img src={assets.logout_icon} className="w-5 mr-2" alt="" />

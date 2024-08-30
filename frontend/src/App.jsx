@@ -10,6 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "react-scroll-to-top";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import MyOrders from "./pages/MyOrders";
+import Verify from "./pages/Verify";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/myorders" element={<MyOrders />} />
         </Routes>
         <Footer />
         <ScrollToTop smooth className="flex items-center justify-center p-3" />
