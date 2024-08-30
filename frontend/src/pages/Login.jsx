@@ -10,13 +10,13 @@ function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const {setToken} = useContext(StoreContext);
-
+  const { setToken } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -25,9 +25,11 @@ function Login() {
         { email, password }
       );
       if (response.data.success) {
-        setToken(response.data.token);
-        localStorage.setItem("token", response.data.token);
-        navigate('/')
+        const { token, user } = response.data;
+        setToken(token);
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user)); // Save user details
+        navigate("/");
         toast.success(response.data.message);
       } else {
         toast.error(response.data.message);
@@ -46,7 +48,11 @@ function Login() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-4 md:space-y-6"
+                action="#"
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -87,7 +93,11 @@ function Login() {
                       onClick={togglePasswordVisibility}
                       className="text-gray-500 dark:text-gray-400"
                     >
-                      {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                      {showPassword ? (
+                        <FaEyeSlash size={20} />
+                      ) : (
+                        <FaEye size={20} />
+                      )}
                     </button>
                   </div>
                 </div>

@@ -46,7 +46,7 @@ export const registerUser = async (req, res) => {
       success: true,
       message: "User registered successfully",
       token,
-      user: { id: user._id, name: user.name, email: user.email },
+      user
     });
   } catch (error) {
     console.error(error.message);
@@ -79,9 +79,11 @@ export const loginUser = async (req, res) => {
       success: true,
       message: "Login successful",
       token,
+      user
     });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: "An error occurred" });
   }
 };
+

@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { StoreContext } from "../context/StoreContext";
+import { toast } from "react-toastify";
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, token, food_list, cartItems, url } =
+  const { getTotalCartAmount, token, food_list, cartItems, url, userId } =
     useContext(StoreContext);
 
   const [data, setData] = useState({
@@ -28,6 +29,10 @@ const PlaceOrder = () => {
 
   const placeOrder = async (event) => {
     event.preventDefault();
+  
+    // Debugging userId
+    console.log("userId from context:", userId);
+  
     let orderItems = [];
     food_list.forEach((item) => {
       if (cartItems[item._id] > 0) {
@@ -35,26 +40,38 @@ const PlaceOrder = () => {
         orderItems.push(itemInfo);
       }
     });
+  
     let orderData = {
+      userId: userId.trim(), // Ensure userId is not an empty string
       address: data,
       items: orderItems,
-      amount: getTotalCartAmount() + 2,
+      amount: getTotalCartAmount() + 2, // Add delivery fee
     };
+  
+    console.log("Placing order with data:", orderData);
+  
     try {
-      let response = await axios.post(url + "/api/order/place", orderData, {
+      let response = await axios.post(`${url}/api/order/place`, orderData, {
         headers: { token },
       });
+  
       if (response.data.success) {
         const { session_url } = response.data;
         window.location.replace(session_url);
+        toast.success("Order placed successfully!");
       } else {
-        alert("Order placement failed: " + response.data.message);
+        console.error("Order placement failed:", response.data.message);
+        toast.error(response.data.message);
       }
     } catch (error) {
-      console.error("Error placing order:", error);
-      alert("An error occurred while placing the order.");
+      console.error(
+        "Error placing order:",
+        error.response?.data || error.message
+      );
+      toast.error(error.response?.data?.message || "Error placing order");
     }
   };
+  
 
   return (
     <div className="w-full md:w-[90%] px-4 mx-auto">

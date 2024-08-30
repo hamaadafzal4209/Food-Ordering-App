@@ -10,8 +10,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const {setToken} = useContext(StoreContext);
-
+  const { setToken } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -26,9 +25,11 @@ function Register() {
         { name, email, password }
       );
       if (response.data.success) {
-        setToken(response.data.token);
-        localStorage.setItem("token", response.data.token);
-        navigate('/')
+        const { token, user } = response.data;
+        setToken(token);
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user)); // Save user details
+        navigate("/");
         toast.success(response.data.message);
       } else {
         toast.error(response.data.message);
@@ -47,10 +48,7 @@ function Register() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create a new account
               </h1>
-              <form
-                onSubmit={handleSubmit}
-                className="space-y-4 md:space-y-6"
-              >
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                 <div>
                   <label
                     htmlFor="name"
