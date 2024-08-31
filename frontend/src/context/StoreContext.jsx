@@ -77,7 +77,7 @@ const StoreContextProvider = (props) => {
         }
       }
     }
-    return totalAmount;
+    return totalAmount.toFixed(2);
   };
 
   const fetchFoodList = async () => {
