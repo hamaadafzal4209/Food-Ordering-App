@@ -45,10 +45,18 @@ const MyOrders = () => {
             <table className="min-w-full bg-white">
               <thead className="bg-gray-200 text-gray-600">
                 <tr>
-                  <th className="py-3 px-6 text-left whitespace-nowrap">Items</th>
-                  <th className="py-3 px-6 text-left whitespace-nowrap">Amount</th>
-                  <th className="py-3 px-6 text-left whitespace-nowrap">Items Count</th>
-                  <th className="py-3 px-6 text-left whitespace-nowrap">Status</th>
+                  <th className="py-3 px-6 text-left whitespace-nowrap">
+                    Items
+                  </th>
+                  <th className="py-3 px-6 text-left whitespace-nowrap">
+                    Amount
+                  </th>
+                  <th className="py-3 px-6 text-left whitespace-nowrap">
+                    Items Count
+                  </th>
+                  <th className="py-3 px-6 text-left whitespace-nowrap">
+                    Status
+                  </th>
                 </tr>
               </thead>
               <tbody className="text-gray-700">
