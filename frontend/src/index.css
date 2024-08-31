@@ -18,25 +18,29 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: darkgray;
 }
 
 body::-webkit-scrollbar-thumb {
-  background: tomato;
+  background: gray;
 }
 
 body::-webkit-scrollbar-thumb:hover {
-  background: rgb(249, 47, 11);
+  background: rgb(112, 112, 112);
   cursor: pointer;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 .header {
   background: linear-gradient(
       to right,
-      rgba(0, 0, 0, 0.6),
-      rgba(255, 255, 255, 0)
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.3)
     ),
-    url("./assets/header_img.png");
+    url("https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
   min-height: 500px;
   width: 100%;
   background-size: cover;

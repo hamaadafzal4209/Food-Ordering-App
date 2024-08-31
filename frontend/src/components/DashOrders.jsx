@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { assets } from '../assets/assets';
-
 const DashOrders = () => {
   const [orders, setOrders] = useState([]);
 
@@ -40,7 +38,7 @@ const DashOrders = () => {
   }, []);
 
   return (
-    <div className="w-full p-5 sm:px-10 border-l border-gray-200 min-h-screen">
+    <div className="w-full p-5 sm:px-10 border-l border-black min-h-screen h-full">
       <h3 className="text-2xl font-semibold mb-6 text-gray-800">Orders</h3>
       <div className="overflow-x-auto bg-white shadow-md rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">

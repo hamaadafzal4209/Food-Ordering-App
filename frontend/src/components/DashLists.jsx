@@ -39,8 +39,8 @@ function DashLists() {
     <div className="w-full p-5 px-5 sm:px-10 border-l border-black min-h-screen h-full">
       <h2 className="text-lg font-semibold pb-4">All Foods List</h2>
       <div className="overflow-x-auto hideScrollBar">
-        <Table className="text-center whitespace-nowrap">
-          <Table.Head className="bg-[#f9f9f9]">
+        <Table className="text-center">
+          <Table.Head className="bg-[#f9f9f9] whitespace-nowrap flex-shrink-0">
             <Table.HeadCell>Image</Table.HeadCell>
             <Table.HeadCell>Name</Table.HeadCell>
             <Table.HeadCell>Category</Table.HeadCell>
@@ -56,7 +56,7 @@ function DashLists() {
                 <Table.Cell>
                   <img
                     src={`http://localhost:8000/images/` + item.image}
-                    className="w-24 h-12 mx-auto object-cover"
+                    className="min-w-24 h-12 mx-auto object-cover whitespace-nowrap flex-shrink-0"
                     alt={item.name}
                   />
                 </Table.Cell>

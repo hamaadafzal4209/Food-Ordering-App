@@ -24,7 +24,7 @@ export function DashSidebar() {
             }`}
           >
             <img className="w-6 flex-shrink-0" src={admin_assets.add_icon} alt="" />
-            <p className="hidden md:block md:pr-20">Add Items</p>
+            <p className="hidden lg:block md:pr-20">Add Items</p>
           </div>
         </Link>
         <Link to="/dashboard?tab=list">
@@ -34,7 +34,7 @@ export function DashSidebar() {
             }`}
           >
             <img className="w-6" src={admin_assets.list_icon} alt="" />
-            <p className="hidden md:block md:pr-20">List Items</p>
+            <p className="hidden lg:block md:pr-20">List Items</p>
           </div>
         </Link>
         <Link to="/dashboard?tab=order">
@@ -44,7 +44,7 @@ export function DashSidebar() {
             }`}
           >
             <img className="w-6" src={admin_assets.order_icon} alt="" />
-            <p className="hidden md:block md:pr-20">Orders</p>
+            <p className="hidden lg:block md:pr-20">Orders</p>
           </div>
         </Link>
       </div>

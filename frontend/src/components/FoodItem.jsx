@@ -22,7 +22,7 @@ function FoodItem({ id, name, price, description, image }) {
         <img
           src={"http://localhost:8000/images/" + image}
           alt={name}
-          className="w-full rounded-tr-[15px] rounded-tl-[15px]"
+          className="w-full h-48 object-cover rounded-tr-[15px] rounded-tl-[15px]"
         />
         {!itemCount ? (
           <img
