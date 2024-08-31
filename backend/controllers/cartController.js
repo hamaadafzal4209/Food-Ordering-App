@@ -30,19 +30,31 @@ export const addToCart = async (req, res) => {
 // remove from cart
 export const removeFromCart = async (req, res) => {
   try {
-    const userId = req.user._id;
+    console.log("Request body:", req.body);
+    const userId = req.user.id;
     let userData = await userModel.findById(userId);
-    let cartData = await userData.cartData;
+    if (!userData) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    let cartData = userData.cartData || {};
+    console.log("Current cart data:", cartData);
     if (cartData[req.body.itemId] > 0) {
       cartData[req.body.itemId] -= 1;
+      if (cartData[req.body.itemId] === 0) {
+        delete cartData[req.body.itemId];
+      }
     }
+
     await userModel.findByIdAndUpdate(userId, { cartData });
+    console.log("Updated cart data:", cartData);
     res.json({ success: true, message: "Removed from cart" });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "Error" });
+    console.error("Error in removeFromCart:", error);
+    res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 // fetch user cart data
 export const getCart = async (req, res) => {

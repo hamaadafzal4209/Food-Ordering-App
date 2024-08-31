@@ -43,8 +43,10 @@ const StoreContextProvider = (props) => {
     try {
       setCartItems((prev) => {
         const updated = { ...prev };
-        if (updated[itemId] > 0) {
+        if (updated[itemId] > 1) {
           updated[itemId] -= 1;
+        } else {
+          delete updated[itemId];
         }
         return updated;
       });
@@ -120,7 +122,7 @@ const StoreContextProvider = (props) => {
       console.log("Loaded data:", { token: storedToken, userId: storedUserId });
     }
     loadData();
-  }, []);
+  }, [token]);
 
   const contextValue = {
     food_list,

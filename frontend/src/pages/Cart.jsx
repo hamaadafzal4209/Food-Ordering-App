@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
-import { Button, Table } from "flowbite-react";
+import { Button, Table, Spinner } from "flowbite-react";
 import { StoreContext } from "../context/StoreContext";
 import { useNavigate } from "react-router-dom";
-import { Spinner } from "flowbite-react"; // Import Spinner from Flowbite
 
 function Cart() {
   const { food_list, cartItems, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
@@ -10,6 +9,7 @@ function Cart() {
   const [isLoading, setIsLoading] = useState(false); // Add loading state
 
   const handleRemoveFromCart = (itemId) => {
+    console.log("Removing item:", itemId);
     setIsLoading(true);
     removeFromCart(itemId).finally(() => {
       setIsLoading(false);
@@ -20,7 +20,7 @@ function Cart() {
   const isCartEmpty = Object.keys(cartItems).length === 0;
 
   return (
-    <div className="w-full md:w-[90%] md:mt-14 px-4 mx-auto">
+    <div className="w-full md:w-[90%] mt-6 md:mt-14 px-4 mx-auto">
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
           <Spinner aria-label="Loading..." />
@@ -32,7 +32,7 @@ function Cart() {
             alt="Empty Cart"
             className="w-48 h-auto"
           />
-          <p className="text-gray-600 mt-4">Your cart is empty</p>
+          <p className="text-gray-600 mb-20">Your cart is empty</p>
         </div>
       ) : (
         <>
@@ -81,8 +81,8 @@ function Cart() {
           </div>
           {/* cart bottom */}
           <div
-            className="my-20 flex justify-between flex-col md:flex-row"
-            style={{ gap: "max(6vw,20px)" }}
+            className="my-20 flex justify-between flex-col lg:flex-row"
+            style={{ gap: "max(3vw,20px)" }}
           >
             {/* cart total */}
             <div className="flex-1 border p-6">
