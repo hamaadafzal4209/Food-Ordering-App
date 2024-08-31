@@ -20,7 +20,7 @@ function FoodItem({ id, name, price, description, image }) {
     >
       <div className="relative">
         <img
-          src={"http://localhost:8000/images/" + image}
+          src={image}
           alt={name}
           className="w-full h-48 object-cover rounded-tr-[15px] rounded-tl-[15px]"
         />
@@ -50,11 +50,11 @@ function FoodItem({ id, name, price, description, image }) {
         )}
       </div>
       <div className="p-5">
-        <div className="flex items-center justify-between mb-[10px]">
-          <h3 className="text-[20px] font-medium">{name}</h3>
-          <img className="w-[70px]" src={assets.rating_starts} alt="Rating" />
+        <div className="flex items-center justify-between mb-1.5">
+          <h3 className="text-[20px] font-medium line-clamp-1">{name}</h3>
         </div>
-        <p className="text-[#676767] text-xs">{description}</p>
+          <img className="w-[70px] mb-2" src={assets.rating_starts} alt="Rating" />
+        <p className="text-[#676767] text-sm line-clamp-2">{description}</p>
         <p className="text-[#FF6347] font-medium text-xl my-[10px]">${price}</p>
       </div>
     </div>

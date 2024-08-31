@@ -2,9 +2,11 @@ import { useState } from "react";
 import { admin_assets } from "../assets/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Button } from "flowbite-react";
 
 function DashAddItem() {
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     name: "",
     description: "",
@@ -22,6 +24,8 @@ function DashAddItem() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);  // Start loading state
+
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
@@ -29,22 +33,28 @@ function DashAddItem() {
     formData.append("price", Number(data.price));
     formData.append("image", image);
 
-    const response = await axios.post(
-      "http://localhost:8000/api/food/add",
-      formData
-    );
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/food/add",
+        formData
+      );
 
-    if (response.data.success) {
-      setData({
-        name: "",
-        description: "",
-        category: "Salad",
-        price: "",
-      });
-      setImage(false);
-      toast.success(response.data.message);
-    } else {
-      toast.error(response.data.message);
+      if (response.data.success) {
+        setData({
+          name: "",
+          description: "",
+          category: "Salad",
+          price: "",
+        });
+        setImage(null);
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error("An error occurred while adding the item.");
+    } finally {
+      setLoading(false);  // Stop loading state
     }
   };
 
@@ -150,12 +160,9 @@ function DashAddItem() {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="w-[200px] py-3 bg-black text-white font-semibold"
-        >
-          Add
-        </button>
+        <Button type="submit" gradientMonochrome="info" isProcessing={loading}>
+          {loading ? "Adding..." : "Add"}
+        </Button>
       </form>
     </div>
   );

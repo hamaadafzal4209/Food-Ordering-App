@@ -37,10 +37,10 @@ export function NavComponent() {
           <Link to="/">
             <div className="flex items-center justify-center">
               <div className="flex items-center">
-                <div className="text-3xl sm:text-4xl font-semibold text-green-600">
+                <div className="text-xl sm:text-4xl font-semibold text-green-600">
                   Savory
                 </div>
-                <div className="text-3xl sm:text-4xl font-semibold text-orange-600">
+                <div className="text-xl sm:text-4xl font-semibold text-orange-600">
                   Bites
                 </div>
               </div>
