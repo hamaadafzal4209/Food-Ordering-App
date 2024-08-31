@@ -15,7 +15,6 @@ const PORT = process.env.PORT || 8000;
 
 // middlewares
 app.use(express.json());
-app.use("/images", express.static("uploads"));
 app.use(cors());
 
 // databse connection
