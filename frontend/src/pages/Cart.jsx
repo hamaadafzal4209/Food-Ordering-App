@@ -4,9 +4,10 @@ import { StoreContext } from "../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 
 function Cart() {
-  const { food_list, cartItems, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
+  const { food_list, cartItems, removeFromCart, getTotalCartAmount } =
+    useContext(StoreContext);
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRemoveFromCart = (itemId) => {
     console.log("Removing item:", itemId);
@@ -25,10 +26,10 @@ function Cart() {
         <div className="flex justify-center items-center h-64">
           <Spinner aria-label="Loading..." />
         </div>
-      ) : isCartEmpty ? ( 
+      ) : isCartEmpty ? (
         <div className="flex flex-col items-center justify-center h-64">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAiQrWU1_XPl-elP1fso3jrcZDEk_d4x-wlg&s" 
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAiQrWU1_XPl-elP1fso3jrcZDEk_d4x-wlg&s"
             alt="Empty Cart"
             className="w-48 h-auto"
           />
@@ -64,7 +65,9 @@ function Cart() {
                         <Table.Cell>{item.name}</Table.Cell>
                         <Table.Cell>${item.price}</Table.Cell>
                         <Table.Cell>{cartItems[item._id]}</Table.Cell>
-                        <Table.Cell>${item.price * cartItems[item._id]}</Table.Cell>
+                        <Table.Cell>
+                          ${item.price * cartItems[item._id]}
+                        </Table.Cell>
                         <Table.Cell
                           onClick={() => handleRemoveFromCart(item._id)}
                           className="cursor-pointer"
